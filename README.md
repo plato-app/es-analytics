@@ -1,24 +1,57 @@
-# Template: TypeScript ES6/CommonJS Package
+# @plato/analytics
 
-This repository is a template for [JavaScript](https://en.wikipedia.org/wiki/JavaScript) packages written in [TypeScript](https://www.typescriptlang.org) and distributed via services like [npm](https://www.npmjs.com).
+Track custom analytics in [Node.js](https://nodejs.org/en/), and persist to long-term storage, such as a [data lake](https://en.wikipedia.org/wiki/Data_lake).
 
-In order to be compatible with as many consumers as possible, the package's TypeScript code is complied to both [CommonJS](https://en.wikipedia.org/wiki/CommonJS) and ["ES6" module](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) formats. This allows the package to be consumed by runtimes like [Node.js](https://nodejs.org) or parsed by bundlers like [rollup.js](https://rollupjs.org/guide/en/).
+## Quick Start
 
-## Features
+```ts
+import { Collector, StoreS3 } from "@plato/analytics";
 
-* 🏗️ TypeScript [transpilation](https://en.wikipedia.org/wiki/Source-to-source_compiler)
-* 👕 TypeScript linting via [eslint](https://eslint.org)
-* 🧪 TypeScript unit test runner via [tape](https://github.com/substack/tape), which produces [Test Anything Protocol](https://en.wikipedia.org/wiki/Test_Anything_Protocol)
-* 📝 TypeScript documentation generation via [TypeDoc](http://typedoc.org)
-* 👷 [Continuous Integration](https://en.wikipedia.org/wiki/Continuous_integration) via [GitHub Actions](https://github.com/features/actions)
-* 📄 [MIT license](https://en.wikipedia.org/wiki/MIT_License)
+// STEP 1: Create a schema for your data =======================================
+// This will give you strong typing when calling .track
 
-## Metadata
+/** Demo analytics schema */
+type DemoSchema = {
+	/** A table of user events associated with a resource */
+	user_events: {
+		/** The time at which the event occurred */
+		event_time: Date;
+		/** The type of event which occurred */
+		event_type: string;
+		/** A resource ID associated with this event */
+		resource_id: string;
+		/** A user ID who performed the event */
+		user_id: string;
+	};
+};
 
-There's always some metadata to update when using boilerplate code, so make sure to do the following:
+// STEP 2: Create a long-term data store =======================================
+// Batches of analytics data are sent to long term storage when they reach a
+// specified threshold, or when the analytics collector is disposed
 
-* Update the package's `name`, `version`, `description`, `author`, etc in `package.json`
-* Update the `LICENSE.md` with the appropriate year and owner
-* Update the `CHANGELOG.md` with your package's changes
-* Remove the `private: true` flag from `package.json` (if you intend to publish to npm)
-* Replace this `README.md` with your own!
+// Create S3 storage layer which writes data to a specified bucket
+const store = new StoreS3("my_bucket");
+
+// STEP 3: Create an analytics collector =======================================
+
+// Create analytics collector respecting our DemoSchema
+const analytics = new Collector<DemoSchema>(store);
+
+// Receive errors from the collector
+analytics.onError.receive((e) => console.log(`ERR: ${e.message}`));
+
+// STEP 4: TRACK ALL THE THINGS! ===============================================
+
+// Track a demo event, for example
+analytics.track("user_events", {
+	event_time: new Date(),
+	event_type: "touch",
+	resource_id: "9438b068-c25b-47a0-b0fe-e8acc6f80ace",
+	user_id: "03d00e69-ea1e-4c39-ade6-803ff3f00e99",
+});
+
+// STEP 5: Stop the collector ==================================================
+
+// Stop collecting wait for graceful shutdown
+await analytics.stop();
+```
