@@ -15,7 +15,7 @@ jobs:
 
       - name: 🔧 Install/Audit
         run: |
-          yarn
+          yarn install --ignore-scripts
           yarn audit
 
       - name: 👕 Lint
