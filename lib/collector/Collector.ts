@@ -1,5 +1,6 @@
 import { createWriteStream, createReadStream, promises } from "fs";
-import { basename } from "path";
+import { tmpdir } from "os";
+import { basename, join } from "path";
 import { Writable, pipeline } from "stream";
 import { createGzip } from "zlib";
 import { Stringifier } from "csv-stringify";
@@ -172,8 +173,7 @@ export class Collector<T extends CollectorSchema> {
 		});
 
 		// Create file writer stream
-		// TODO: Use real temp folder
-		const filename = `test-temp/${id}.csv${this.batchZip ? ".gz" : ""}`;
+		const filename = join(tmpdir(), `analytics-${id}.csv${this.batchZip ? ".gz" : ""}`);
 		const file = createWriteStream(filename);
 
 		// A reference to the stream by-passing the formatter
