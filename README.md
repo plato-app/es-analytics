@@ -11,7 +11,7 @@ import { Collector, StoreS3 } from "@plato/analytics";
 // This will give you strong typing when calling .track
 
 /** Demo analytics schema */
-type DemoSchema = {
+type ExampleSchema = {
 	/** A table of user events associated with a resource */
 	user_events: {
 		/** The time at which the event occurred */
@@ -26,8 +26,8 @@ type DemoSchema = {
 };
 
 // STEP 2: Create a long-term data store =======================================
-// Batches of analytics data are sent to long term storage when they reach a
-// specified threshold, or when the analytics collector is disposed
+// Batches of analytics data are sent to long term storage when they reach
+// specified thresholds, or when the analytics collector is stopped
 
 // Create S3 storage layer which writes data to a specified bucket
 const store = new StoreS3("my_bucket");
@@ -35,10 +35,13 @@ const store = new StoreS3("my_bucket");
 // STEP 3: Create an analytics collector =======================================
 
 // Create analytics collector respecting our DemoSchema
-const analytics = new Collector<DemoSchema>(store);
+const analytics = new Collector<ExampleSchema>(store);
 
 // Receive errors from the collector
-analytics.onError.receive((e) => console.log(`ERR: ${e.message}`));
+analytics.onError.receive((e) => console.log(`ERROR: ${e.message}`));
+
+// Receive flush notifications from the collector
+analytics.onFlush.receive((info) => console.log(`FLUSH: ${JSON.stringify(info)}`));
 
 // STEP 4: TRACK ALL THE THINGS! ===============================================
 
@@ -52,6 +55,45 @@ analytics.track("user_events", {
 
 // STEP 5: Stop the collector ==================================================
 
-// Stop collecting wait for graceful shutdown
+// Stop collecting and wait for graceful shutdown
 await analytics.stop();
+```
+
+## Specification
+
+### Objects
+
+Objects are files within a data lake (such as AWS S3). Each object uploaded to the data lake will conform to the following specifications:
+
+1. Contain data for a single table adhering to the [defined CSV format](#csv-format)
+1. Compressed with gzip
+1. Object key names must conform to the following format: `YYYY/MM/DD/HH/{TABLE_NAME}/{GUID}.csv(.gz)`
+	* `YYYY/MM/DD/HH` is the 4 digit year, 2 digit month, 2 digit day, and 2 digit hour of the UTC time when this object was created
+	* `{TABLE_NAME}` must be unique across all data sources within this lake and contain only alphanumeric characters and underscores, e.g. `[a-zA-Z0-9_]`
+	* Per convention, `{TABLE_NAME}` should contain a unique prefix indicating the data source, e.g. `game_*`
+	* `{GUID}` is a Version 4 GUID
+
+### CSV Format
+
+CSV files uploaded to the data lake will adhere to the following specifications:
+
+1. Conform to [RFC 4180 - Common Format for Comma-Separated Values](https://tools.ietf.org/html/rfc4180)
+1. Contain only records for a single table
+1. Column headers must be declared in the first non-comment line
+1. Column headers must contain only alphanumeric characters (`[a-zA-Z0-9]`) and underscores (`_`)
+1. Column types should be declared as a comment in the first line, with the following specifications:
+	* Aside from the comment character (`#`), the types row must contain a comma-separated list of text values indicating the column's data type
+	*	Valid data types are as follows:
+		* `text`
+		* `timestamp(z)`
+		* `int`
+
+#### Example CSV Data
+
+```
+#text,timestampz,int
+session_id,end_time,end_reason
+oiccvmz0cvuu-2my7wvf99enmi,2020-06-08T17:13:49.062Z,0
+2slv18vtkjyl4-28nz20jhsdt3w,2020-06-08T17:13:49.112Z,2
+2jk1eocbnkcys-2zffiy4q44z4o,2020-06-08T17:13:49.523Z,0
 ```
