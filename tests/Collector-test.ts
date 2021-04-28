@@ -2,31 +2,25 @@ import { join } from "path";
 import * as tape from "tape";
 import { Collector, StoreFS } from "..";
 
-/** Game event associated with a specific user */
-type GameUserEvent = {
-	event_time: Date;
-	event_type: string;
-	game_id: string;
-	psession_id: string;
-	user_id: string;
-}
-
-/** Game creation event */
-type GameSessionCreate = {
-	psession_id: string;
-}
-
-/** Overall analytics schema for games */
-type GameSchema = {
-	game_user_event: GameUserEvent;
-	game_session_create: GameSessionCreate;
+/** Test schema */
+type TestSchema = {
+	game_user_event: {
+		event_time: Date;
+		event_type: string;
+		game_id: string;
+		session_id: string;
+		user_id: string;
+	};
+	game_session_create: {
+		session_id: string;
+	};
 }
 
 /** File system data store */
 const store = new StoreFS(join(__dirname, "store"));
 
-tape("AnalyticsCollector", async (t) => {
-	const analytics = new Collector<GameSchema>(store, {
+tape("Collector", async (t) => {
+	const analytics = new Collector<TestSchema>(store, {
 		columnTypes: {
 			game_user_event: {
 				psession_id: "uuid",
@@ -37,18 +31,18 @@ tape("AnalyticsCollector", async (t) => {
 		},
 	});
 
-	analytics.onFlush.receive((table, id, records) => t.comment(`Flush: table=${table}, id=${id}, records=${records}`));
 	analytics.onError.receive((e) => t.fail(e.message));
+	analytics.onFlush.receive((info) => t.comment(`FLUSH: ${JSON.stringify(info)}`));
 
 	analytics.track("game_session_create", {
-		psession_id: "abc123",
+		session_id: "abc123",
 	});
 
 	analytics.track("game_user_event", {
 		event_time: new Date(),
 		event_type: "join",
 		game_id: "fourinarow",
-		psession_id: "abc123",
+		session_id: "abc123",
 		user_id: "xyz890",
 	});
 
@@ -56,11 +50,51 @@ tape("AnalyticsCollector", async (t) => {
 		event_time: new Date(),
 		event_type: "join",
 		game_id: "crazy8",
-		psession_id: "def456",
+		session_id: "def456",
 		user_id: "ghi789",
 	});
 
 	await analytics.stop();
+	t.end();
+});
 
+tape("Collector 2", async (t) => {
+	const analytics = new Collector<TestSchema>(store, {
+		columnTypes: {
+			game_user_event: {
+				psession_id: "uuid",
+			},
+			game_session_create: {
+				psession_id: "uuid",
+			},
+		},
+		batchZip: false,
+		batchRecordLimit: 10000,
+	});
+
+	analytics.onError.receive((e) => t.fail(e.message));
+	analytics.onFlush.receive((info) => t.comment(`FLUSH: ${JSON.stringify(info)}`));
+
+	await new Promise<void>((resolve) => {
+		let count = 0;
+		let done = false;
+		const i = setInterval(async () => {
+			if (done) { return; }
+			analytics.track("game_user_event", {
+				event_time: new Date(),
+				event_type: "join",
+				game_id: "fourinarow",
+				session_id: "abc123",
+				user_id: "xyz890",
+			});
+			if (++count >= 30000) {
+				done = true;
+				clearInterval(i);
+				resolve();
+			}
+		}, 1);
+	});
+
+	await analytics.stop();
 	t.end();
 });

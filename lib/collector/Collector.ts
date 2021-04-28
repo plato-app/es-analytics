@@ -8,6 +8,18 @@ import { v4 as uuidv4 } from "uuid";
 import { Signal } from "@plato/signal";
 import { Store } from "../store/Store";
 
+/** Possible triggers for a batch flush */
+export const enum FlushTrigger {
+	/** Collector was stopped */
+	Stop = "stop",
+	/** The batch met a specified limit of records */
+	RecordLimit = "limit_records",
+	/** The batch met a specified limit of age */
+	AgeLimit = "limit_age",
+	/** The underlying write stream is backed up */
+	Backpressure = "backpressure",
+}
+
 /** A record within a table of data */
 export type TableRecord = {
 	[index: string]: string | number | boolean | Date;
@@ -27,8 +39,24 @@ export interface CollectorConfig {
 	columnTypes?: TableColumnTypes;
 	/** Whether or not to gzip batch data */
 	batchZip?: boolean;
-	/** Threshold at which batches are automatically flushed */
-	batchThreshold?: number;
+	/** Record limit at which batches are automatically flushed */
+	batchRecordLimit?: number;
+	/** Age limit at which batches are automatically flushed */
+	batchAgeLimit?: number;
+}
+
+/** Extra batch flush info */
+export interface FlushInfo {
+	/** The table for which this batch contains records */
+	table: string;
+	/** The unique ID of the flushed batch */
+	id: string;
+	/** The trigger for this batch to be flushed */
+	trigger: FlushTrigger;
+	/** The number of records flushed */
+	records: number;
+	/** The age of the batch */
+	age: number;
 }
 
 /** A batch of records for a given table */
@@ -43,6 +71,8 @@ interface TableBatch {
 	pipeline: Writable;
 	/** Number of records written to buffer */
 	records: number;
+	/** Relative time when this batch was started */
+	started: number;
 	/** Emitted when the pipeline has finished */
 	onFinish: Signal;
 }
@@ -95,7 +125,7 @@ function createDatePrefix(date: Date): string {
 export class Collector<T extends CollectorSchema> {
 
 	/** Emitted when a batch has been flushed successfully */
-	public readonly onFlush = new Signal<(table: string, id: string, records: number) => void>();
+	public readonly onFlush = new Signal<(info: FlushInfo) => void>();
 
 	/** Emitted when an error has occurred */
 	public readonly onError = new Signal<(e: Error) => void>();
@@ -112,8 +142,11 @@ export class Collector<T extends CollectorSchema> {
 	/** Whether or not to zip batches */
 	private readonly batchZip: boolean;
 
-	/** Record threshold before batches are automatically flushed */
-	private readonly batchThreshold: number;
+	/** Record limit at which batches are automatically flushed */
+	private readonly batchRecordLimit: number;
+
+	/** Age limit at which batches are automatically flushed */
+	private readonly batchAgeLimit: number;
 
 	/** Whether or not the collector is collecting data */
 	private disabled = false;
@@ -122,7 +155,8 @@ export class Collector<T extends CollectorSchema> {
 		this.store = store;
 		this.columnTypes = config?.columnTypes;
 		this.batchZip = config?.batchZip ?? true;
-		this.batchThreshold = config?.batchThreshold ?? 1000;
+		this.batchRecordLimit = config?.batchRecordLimit ?? 200_000;
+		this.batchAgeLimit = config?.batchAgeLimit ?? (60 * 60 * 1000);
 	}
 
 	/** Stop collecting and flush any pending data */
@@ -134,11 +168,15 @@ export class Collector<T extends CollectorSchema> {
 		// Finalize pending batches
 		const queue: Promise<void>[] = [];
 		for (const [, batch] of this.batches) {
-			queue.push(this.flushBatch(batch));
+			queue.push(this.flushBatch(batch, FlushTrigger.Stop));
 		}
 
 		// Wait for batches to finalize and emit any errors
 		await Promise.allSettled(queue);
+
+		// Purge signal receivers
+		this.onFlush.purge();
+		this.onError.purge();
 	}
 
 	/** Track an event */
@@ -173,7 +211,7 @@ export class Collector<T extends CollectorSchema> {
 		});
 
 		// Create file writer stream
-		const filename = join(tmpdir(), `analytics-${id}.csv${this.batchZip ? ".gz" : ""}`);
+		const filename = join(tmpdir(), `plato-analytics-${id}.csv${this.batchZip ? ".gz" : ""}`);
 		const file = createWriteStream(filename);
 
 		// A reference to the stream by-passing the formatter
@@ -201,6 +239,7 @@ export class Collector<T extends CollectorSchema> {
 			table,
 			pipeline: format,
 			records: 0,
+			started: Date.now(),
 			onFinish: finish,
 		};
 	}
@@ -210,15 +249,17 @@ export class Collector<T extends CollectorSchema> {
 		// Pre-process record
 		preprocessRecord(record);
 
-		// Write record to pipeline
+		// Write record to pipeline and check for automatica flush conditions
+		batch.records++;
 		if (!batch.pipeline.write(record)) {
-			// TODO: handle drain
-			console.log("AWAIT DRAIN FOR THIS BATCH ONLY");
-		}
-
-		// Increment record count and check for flush threshold
-		if (++batch.records >= this.batchThreshold) {
-			this.flushBatch(batch);
+			// Flush because the batch pipeline needs to drain
+			this.flushBatch(batch, FlushTrigger.Backpressure);
+		} else if (batch.records >= this.batchRecordLimit) {
+			// Flush because the batch has reached the record limit
+			this.flushBatch(batch, FlushTrigger.RecordLimit);
+		} else if (Date.now() - batch.started >= this.batchAgeLimit) {
+			// Flush because the batch has reached the age limit
+			this.flushBatch(batch, FlushTrigger.AgeLimit);
 		}
 	}
 
@@ -243,11 +284,14 @@ export class Collector<T extends CollectorSchema> {
 	}
 
 	/** End batch pipeline and send to long-term storage */
-	private async flushBatch(batch: TableBatch): Promise<void> {
+	private async flushBatch(batch: TableBatch, trigger: FlushTrigger): Promise<void> {
 		try {
 			// Remove batch from pending batches collection
 			// The next incoming record for this table will trigger a new batch
 			this.batches.delete(batch.table);
+
+			// Calculate the age of this batch for informational purposes
+			const age = Date.now() - batch.started;
 
 			// Wait for pipeline to finish
 			await finishBatch(batch);
@@ -256,7 +300,13 @@ export class Collector<T extends CollectorSchema> {
 			await this.storeBatch(batch);
 
 			// Emit flush event
-			this.onFlush.emit(batch.table, batch.id, batch.records);
+			this.onFlush.emit({
+				table: batch.table,
+				id: batch.id,
+				records: batch.records,
+				trigger,
+				age,
+			});
 		} catch (e) {
 			this.onError.emit(e);
 		} finally {
