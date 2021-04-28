@@ -71,7 +71,7 @@
 <span style="color: #008000">// This will give you strong typing when calling .track</span>
 
 <span style="color: #008000">/** Demo analytics schema */</span>
-<span style="color: #0000FF">type</span><span style="color: #000000"> </span><span style="color: #267F99">DemoSchema</span><span style="color: #000000"> = {</span>
+<span style="color: #0000FF">type</span><span style="color: #000000"> </span><span style="color: #267F99">ExampleSchema</span><span style="color: #000000"> = {</span>
 <span style="color: #000000">    </span><span style="color: #008000">/** A table of user events associated with a resource */</span>
 <span style="color: #000000">    </span><span style="color: #001080">user_events</span><span style="color: #000000">: {</span>
 <span style="color: #000000">        </span><span style="color: #008000">/** The time at which the event occurred */</span>
@@ -86,8 +86,8 @@
 <span style="color: #000000">};</span>
 
 <span style="color: #008000">// STEP 2: Create a long-term data store =======================================</span>
-<span style="color: #008000">// Batches of analytics data are sent to long term storage when they reach a</span>
-<span style="color: #008000">// specified threshold, or when the analytics collector is disposed</span>
+<span style="color: #008000">// Batches of analytics data are sent to long term storage when they reach</span>
+<span style="color: #008000">// specified thresholds, or when the analytics collector is stopped</span>
 
 <span style="color: #008000">// Create S3 storage layer which writes data to a specified bucket</span>
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">store</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">StoreS3</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;my_bucket&quot;</span><span style="color: #000000">);</span>
@@ -95,10 +95,13 @@
 <span style="color: #008000">// STEP 3: Create an analytics collector =======================================</span>
 
 <span style="color: #008000">// Create analytics collector respecting our DemoSchema</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">analytics</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Collector</span><span style="color: #000000">&lt;</span><span style="color: #267F99">DemoSchema</span><span style="color: #000000">&gt;(</span><span style="color: #001080">store</span><span style="color: #000000">);</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">analytics</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Collector</span><span style="color: #000000">&lt;</span><span style="color: #267F99">ExampleSchema</span><span style="color: #000000">&gt;(</span><span style="color: #001080">store</span><span style="color: #000000">);</span>
 
 <span style="color: #008000">// Receive errors from the collector</span>
-<span style="color: #001080">analytics</span><span style="color: #000000">.</span><span style="color: #001080">onError</span><span style="color: #000000">.</span><span style="color: #795E26">receive</span><span style="color: #000000">((</span><span style="color: #001080">e</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">`ERR: </span><span style="color: #0000FF">${</span><span style="color: #001080">e</span><span style="color: #000000FF">.</span><span style="color: #001080">message</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #000000">));</span>
+<span style="color: #001080">analytics</span><span style="color: #000000">.</span><span style="color: #001080">onError</span><span style="color: #000000">.</span><span style="color: #795E26">receive</span><span style="color: #000000">((</span><span style="color: #001080">e</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">`ERROR: </span><span style="color: #0000FF">${</span><span style="color: #001080">e</span><span style="color: #000000FF">.</span><span style="color: #001080">message</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #000000">));</span>
+
+<span style="color: #008000">// Receive flush notifications from the collector</span>
+<span style="color: #001080">analytics</span><span style="color: #000000">.</span><span style="color: #001080">onFlush</span><span style="color: #000000">.</span><span style="color: #795E26">receive</span><span style="color: #000000">((</span><span style="color: #001080">info</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">`FLUSH: </span><span style="color: #0000FF">${</span><span style="color: #267F99">JSON</span><span style="color: #000000FF">.</span><span style="color: #795E26">stringify</span><span style="color: #000000FF">(</span><span style="color: #001080">info</span><span style="color: #000000FF">)</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #000000">));</span>
 
 <span style="color: #008000">// STEP 4: TRACK ALL THE THINGS! ===============================================</span>
 
@@ -112,8 +115,50 @@
 
 <span style="color: #008000">// STEP 5: Stop the collector ==================================================</span>
 
-<span style="color: #008000">// Stop collecting wait for graceful shutdown</span>
+<span style="color: #008000">// Stop collecting and wait for graceful shutdown</span>
 <span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">analytics</span><span style="color: #000000">.</span><span style="color: #795E26">stop</span><span style="color: #000000">();</span>
+</code></pre>
+				<a href="#specification" id="specification" style="color: inherit; text-decoration: none;">
+					<h2>Specification</h2>
+				</a>
+				<a href="#objects" id="objects" style="color: inherit; text-decoration: none;">
+					<h3>Objects</h3>
+				</a>
+				<p>Objects are files within a data lake (such as AWS S3). Each object uploaded to the data lake will conform to the following specifications:</p>
+				<ol>
+					<li>Contain data for a single table adhering to the <a href="#csv-format">defined CSV format</a></li>
+					<li>Compressed with gzip</li>
+					<li>Object key names must conform to the following format: <code>YYYY/MM/DD/HH/{TABLE_NAME}/{GUID}.csv(.gz)</code><ul>
+							<li><code>YYYY/MM/DD/HH</code> is the 4 digit year, 2 digit month, 2 digit day, and 2 digit hour of the UTC time when this object was created</li>
+							<li><code>{TABLE_NAME}</code> must be unique across all data sources within this lake and contain only alphanumeric characters and underscores, e.g. <code>[a-zA-Z0-9_]</code></li>
+							<li>Per convention, <code>{TABLE_NAME}</code> should contain a unique prefix indicating the data source, e.g. <code>game_*</code></li>
+							<li><code>{GUID}</code> is a Version 4 GUID</li>
+						</ul>
+					</li>
+				</ol>
+				<a href="#csv-format" id="csv-format" style="color: inherit; text-decoration: none;">
+					<h3>CSV Format</h3>
+				</a>
+				<p>CSV files uploaded to the data lake will adhere to the following specifications:</p>
+				<ol>
+					<li>Conform to <a href="https://tools.ietf.org/html/rfc4180">RFC 4180 - Common Format for Comma-Separated Values</a></li>
+					<li>Contain only records for a single table</li>
+					<li>Column headers must be declared in the first non-comment line</li>
+					<li>Column headers must contain only alphanumeric characters (<code>[a-zA-Z0-9]</code>) and underscores (<code>_</code>)</li>
+					<li>Column types should be declared as a comment in the first line, with the following specifications:<ul>
+							<li>Aside from the comment character (<code>#</code>), the types row must contain a comma-separated list of text values indicating the column&#39;s data type</li>
+							<li>   Valid data types are as follows:     * <code>text</code>     * <code>timestamp(z)</code>     * <code>int</code></li>
+						</ul>
+					</li>
+				</ol>
+				<a href="#example-csv-data" id="example-csv-data" style="color: inherit; text-decoration: none;">
+					<h4>Example CSV Data</h4>
+				</a>
+				<pre><code><span style="color: #000000">#</span><span style="color: #001080">text</span><span style="color: #000000">,</span><span style="color: #001080">timestampz</span><span style="color: #000000">,</span><span style="color: #001080">int</span>
+<span style="color: #001080">session_id</span><span style="color: #000000">,</span><span style="color: #001080">end_time</span><span style="color: #000000">,</span><span style="color: #001080">end_reason</span>
+<span style="color: #001080">oiccvmz0cvuu</span><span style="color: #000000">-2</span><span style="color: #001080">my7wvf99enmi</span><span style="color: #000000">,</span><span style="color: #098658">2020</span><span style="color: #000000">-</span><span style="color: #098658">06</span><span style="color: #000000">-08T17:</span><span style="color: #098658">13</span><span style="color: #000000">:49.062</span><span style="color: #0070C1">Z</span><span style="color: #000000">,</span><span style="color: #098658">0</span>
+<span style="color: #000000">2</span><span style="color: #001080">slv18vtkjyl4</span><span style="color: #000000">-28</span><span style="color: #001080">nz20jhsdt3w</span><span style="color: #000000">,</span><span style="color: #098658">2020</span><span style="color: #000000">-</span><span style="color: #098658">06</span><span style="color: #000000">-08T17:</span><span style="color: #098658">13</span><span style="color: #000000">:49.112</span><span style="color: #0070C1">Z</span><span style="color: #000000">,</span><span style="color: #098658">2</span>
+<span style="color: #000000">2</span><span style="color: #001080">jk1eocbnkcys</span><span style="color: #000000">-2</span><span style="color: #001080">zffiy4q44z4o</span><span style="color: #000000">,</span><span style="color: #098658">2020</span><span style="color: #000000">-</span><span style="color: #098658">06</span><span style="color: #000000">-08T17:</span><span style="color: #098658">13</span><span style="color: #000000">:49.523</span><span style="color: #0070C1">Z</span><span style="color: #000000">,</span><span style="color: #098658">0</span>
 </code></pre>
 			</div>
 		</div>
