@@ -34,6 +34,9 @@ tape("Collector", async (t) => {
 			game_session_create: {
 				session_id: "uuid",
 			},
+			game_custom_event_$: {
+				session_id: "uuid",
+			},
 		},
 	});
 
@@ -73,6 +76,7 @@ tape("Collector", async (t) => {
 
 tape("Collector 2", async (t) => {
 	const analytics = new Collector<TestSchema>(store, {
+		batchRecordLimit: 10000,
 		columnTypes: {
 			game_user_event: {
 				psession_id: "uuid",
@@ -81,8 +85,6 @@ tape("Collector 2", async (t) => {
 				psession_id: "uuid",
 			},
 		},
-		batchZip: false,
-		batchRecordLimit: 10000,
 	});
 
 	analytics.onError.receive((e) => t.fail(e.message));

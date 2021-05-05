@@ -199,7 +199,7 @@ export class Collector<T extends CollectorSchema> {
 		// Use existing batch pipeline, or create a new batch
 		let batch = this.batches.get(name);
 		if (batch === undefined) {
-			batch = this.createBatch(name, record);
+			batch = this.createBatch(table as string, name, record);
 			this.batches.set(name, batch);
 		}
 
@@ -208,7 +208,7 @@ export class Collector<T extends CollectorSchema> {
 	}
 
 	/** Create a new batch of records */
-	private createBatch(table: string, record: T[keyof T]): TableBatch {
+	private createBatch(schemaTable: string, table: string, record: T[keyof T]): TableBatch {
 		// Create a UUID for this table segment
 		const id = uuidv4();
 
@@ -237,7 +237,7 @@ export class Collector<T extends CollectorSchema> {
 		}
 
 		// Write custom headers directly to output stream
-		this.writeBatchHeader(table, record, bypass);
+		this.writeBatchHeader(schemaTable, record, bypass);
 
 		// Create batch
 		return {
