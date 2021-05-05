@@ -63,9 +63,13 @@
 				</a>
 				<p><a href="https://github.com/plato-app/es-analytics/actions/workflows/node.yml"><img src="https://github.com/plato-app/es-analytics/actions/workflows/node.yml/badge.svg" alt="Node.js CI"></a> <a href="https://badge.fury.io/js/%40plato%2Fanalytics"><img src="https://badge.fury.io/js/%40plato%2Fanalytics.svg" alt="npm version"></a></p>
 				<p>Track custom analytics in <a href="https://nodejs.org/en/">Node.js</a>, and persist to long-term storage, such as a <a href="https://en.wikipedia.org/wiki/Data_lake">data lake</a>.</p>
-				<a href="#quick-start" id="quick-start" style="color: inherit; text-decoration: none;">
-					<h2>Quick Start</h2>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h2>Usage</h2>
 				</a>
+				<p>Install via Yarn (or npm):</p>
+				<pre><code class="language-sh"><span style="color: #000000">yarn add @plato/analytics</span>
+</code></pre>
+				<p>Define a schema, create a collector, and store events in S3:</p>
 				<pre><code class="language-ts"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Collector</span><span style="color: #000000">, </span><span style="color: #001080">StoreS3</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@plato/analytics&quot;</span><span style="color: #000000">;</span>
 
 <span style="color: #008000">// STEP 1: Create a schema for your data =======================================</span>
@@ -119,6 +123,7 @@
 <span style="color: #008000">// Stop collecting and wait for graceful shutdown</span>
 <span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">analytics</span><span style="color: #000000">.</span><span style="color: #795E26">stop</span><span style="color: #000000">();</span>
 </code></pre>
+				<p>See the <a href="https://plato-app.github.io/es-signal/">API Reference</a> for more information.</p>
 				<a href="#wildcard-tables" id="wildcard-tables" style="color: inherit; text-decoration: none;">
 					<h2>Wildcard Tables</h2>
 				</a>
