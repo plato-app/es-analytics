@@ -118,6 +118,37 @@
 <span style="color: #008000">// Stop collecting and wait for graceful shutdown</span>
 <span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">analytics</span><span style="color: #000000">.</span><span style="color: #795E26">stop</span><span style="color: #000000">();</span>
 </code></pre>
+				<a href="#wildcard-tables" id="wildcard-tables" style="color: inherit; text-decoration: none;">
+					<h2>Wildcard Tables</h2>
+				</a>
+				<p>The collector supports wildcard table names, which share a schema. For example, let&#39;s say we required a set of tables with custom events for specific games. We would define the schema for these table as follows:</p>
+				<pre><code class="language-ts"><span style="color: #0000FF">type</span><span style="color: #000000"> </span><span style="color: #267F99">ExampleWildcardSchema</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">    </span><span style="color: #001080">game_custom_event_$</span><span style="color: #000000">: { </span><span style="color: #008000">// &lt;--- Notice the &quot;$&quot; wildcard token in the table name</span>
+<span style="color: #000000">        </span><span style="color: #001080">event_time</span><span style="color: #000000">: </span><span style="color: #267F99">Date</span><span style="color: #000000">;</span>
+<span style="color: #000000">        </span><span style="color: #001080">event_type</span><span style="color: #000000">: </span><span style="color: #267F99">string</span><span style="color: #000000">;</span>
+<span style="color: #000000">        </span><span style="color: #001080">event_value</span><span style="color: #000000">: </span><span style="color: #267F99">string</span><span style="color: #000000">;</span>
+<span style="color: #000000">        </span><span style="color: #001080">session_id</span><span style="color: #000000">: </span><span style="color: #267F99">string</span><span style="color: #000000">;</span>
+<span style="color: #000000">    };</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<p>When tracking events, supply a third parameter with the wildcard value, for example:</p>
+				<pre><code class="language-ts"><span style="color: #008000">// Track a custom event for Pool</span>
+<span style="color: #001080">analytics</span><span style="color: #000000">.</span><span style="color: #795E26">track</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;game_custom_event_$&quot;</span><span style="color: #000000">, {</span>
+<span style="color: #000000">    </span><span style="color: #001080">event_time:</span><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #267F99">Date</span><span style="color: #000000">(),</span>
+<span style="color: #000000">    </span><span style="color: #001080">event_type:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;foo&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">event_value:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;bar&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">session_id:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;9438b068-c25b-47a0-b0fe-e8acc6f80ace&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">}, </span><span style="color: #A31515">&quot;pool&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// &lt;--- Notice the wildcard value</span>
+
+<span style="color: #008000">// Track a custom event for Bowling</span>
+<span style="color: #001080">analytics</span><span style="color: #000000">.</span><span style="color: #795E26">track</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;game_custom_event_$&quot;</span><span style="color: #000000">, {</span>
+<span style="color: #000000">    </span><span style="color: #001080">event_time:</span><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #267F99">Date</span><span style="color: #000000">(),</span>
+<span style="color: #000000">    </span><span style="color: #001080">event_type:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;foo&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">event_value:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;bar&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">session_id:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;9438b068-c25b-47a0-b0fe-e8acc6f80ace&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">}, </span><span style="color: #A31515">&quot;bowling&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// &lt;--- Same schema, different wildcard value</span>
+</code></pre>
+				<p>This will result in two separate tables of data: <code>game_custom_event_pool</code> and <code>game_custom_event_bowing</code> (yet both sharing the schema defined for <code>game_custom_event_$</code>).</p>
 				<a href="#specification" id="specification" style="color: inherit; text-decoration: none;">
 					<h2>Specification</h2>
 				</a>
