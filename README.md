@@ -4,7 +4,15 @@
 
 Track custom analytics in [Node.js](https://nodejs.org/en/), and persist to long-term storage, such as a [data lake](https://en.wikipedia.org/wiki/Data_lake).
 
-## Quick Start
+## Usage
+
+Install via Yarn (or npm):
+
+```sh
+yarn add @plato/analytics
+```
+
+Define a schema, create a collector, and store events in S3:
 
 ```ts
 import { Collector, StoreS3 } from "@plato/analytics";
@@ -60,6 +68,8 @@ analytics.track("user_events", {
 // Stop collecting and wait for graceful shutdown
 await analytics.stop();
 ```
+
+See the [API Reference](https://plato-app.github.io/es-signal/) for more information.
 
 ## Wildcard Tables
 
