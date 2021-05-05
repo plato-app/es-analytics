@@ -1,5 +1,7 @@
 # @plato/analytics
 
+[![Node.js CI](https://github.com/plato-app/es-analytics/actions/workflows/node.yml/badge.svg)](https://github.com/plato-app/es-analytics/actions/workflows/node.yml) [![npm version](https://badge.fury.io/js/%40plato%2Fanalytics.svg)](https://badge.fury.io/js/%40plato%2Fanalytics)
+
 Track custom analytics in [Node.js](https://nodejs.org/en/), and persist to long-term storage, such as a [data lake](https://en.wikipedia.org/wiki/Data_lake).
 
 ## Quick Start
