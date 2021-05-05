@@ -77,6 +77,9 @@ interface TableBatch {
 	onFinish: Signal;
 }
 
+/** Temp file prefix (helpful when debugging) */
+const TempFilePrefix = "plato-analytics-";
+
 /** Token symbol for wildcard table names, e.g. "my_table_$" */
 const TokenSymbol = "$";
 
@@ -218,7 +221,7 @@ export class Collector<T extends CollectorSchema> {
 		});
 
 		// Create file writer stream
-		const filename = join(tmpdir(), `plato-analytics-${id}.csv${this.batchZip ? ".gz" : ""}`);
+		const filename = join(tmpdir(), `${TempFilePrefix}${id}.csv${this.batchZip ? ".gz" : ""}`);
 		const file = createWriteStream(filename);
 
 		// A reference to the stream by-passing the formatter
@@ -325,7 +328,8 @@ export class Collector<T extends CollectorSchema> {
 	private storeBatch(batch: TableBatch): Promise<void> {
 		// Compose object key, according to spec
 		const now = new Date();
-		const key = `${createDatePrefix(now)}/${batch.table}/${basename(batch.filename)}`;
+		const base = basename(batch.filename).replace(TempFilePrefix, "");
+		const key = `${createDatePrefix(now)}/${batch.table}/${base}`;
 
 		// Put batch content into long-term storage
 		return this.store.put(key, createReadStream(batch.filename));
