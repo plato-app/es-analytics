@@ -77,6 +77,9 @@ interface TableBatch {
 	onFinish: Signal;
 }
 
+/** Token symbol for wildcard table names, e.g. "my_table_$" */
+const TokenSymbol = "$";
+
 /** Await the end of a batch's pipeline */
 function finishBatch(batch: TableBatch): Promise<void> {
 	return new Promise((resolve, reject) => {
@@ -131,7 +134,7 @@ export class Collector<T extends CollectorSchema> {
 	public readonly onError = new Signal<(e: Error) => void>();
 
 	/** Pending record batches */
-	private readonly batches = new Map<keyof T, TableBatch>();
+	private readonly batches = new Map<string, TableBatch>();
 
 	/** Long-term storage interface */
 	private readonly store: Store;
@@ -180,21 +183,25 @@ export class Collector<T extends CollectorSchema> {
 	}
 
 	/** Track an event */
-	public track(table: keyof T, record: T[keyof T]): void {
+	public track(table: keyof T, record: T[keyof T], token?: string): void {
 		// Ensure collection is enabled
 		if (this.disabled) {
 			this.onError.emit(new Error("Collector stopped"));
 			return;
 		}
 
-		// Use existing batch pipeline, or create a new batch
-		let batch = this.batches.get(table);
-		if (batch === undefined) {
-			batch = this.createBatch(table.toString(), record);
-			this.batches.set(table, batch);
+		// Determine final table name
+		let name = table as string;
+		if (name.indexOf(TokenSymbol) !== -1 && token !== undefined) {
+			name = name.replace(TokenSymbol, token);
 		}
 
-		// TODO: Detect if batch is awaiting drain, and drop record
+		// Use existing batch pipeline, or create a new batch
+		let batch = this.batches.get(name);
+		if (batch === undefined) {
+			batch = this.createBatch(name, record);
+			this.batches.set(name, batch);
+		}
 
 		// Write record to batch
 		this.writeBatchRecord(batch, record);

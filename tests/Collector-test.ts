@@ -14,6 +14,12 @@ type TestSchema = {
 	game_session_create: {
 		session_id: string;
 	};
+	game_custom_event_$: {
+		event_time: Date;
+		event_type: string;
+		event_value: string;
+		session_id: string;
+	};
 }
 
 /** File system data store */
@@ -23,10 +29,10 @@ tape("Collector", async (t) => {
 	const analytics = new Collector<TestSchema>(store, {
 		columnTypes: {
 			game_user_event: {
-				psession_id: "uuid",
+				session_id: "uuid",
 			},
 			game_session_create: {
-				psession_id: "uuid",
+				session_id: "uuid",
 			},
 		},
 	});
@@ -53,6 +59,13 @@ tape("Collector", async (t) => {
 		session_id: "def456",
 		user_id: "ghi789",
 	});
+
+	analytics.track("game_custom_event_$", {
+		event_time: new Date(),
+		event_type: "foobar",
+		event_value: "bazqux",
+		session_id: "ace135",
+	}, "pool");
 
 	await analytics.stop();
 	t.end();

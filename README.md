@@ -59,6 +59,43 @@ analytics.track("user_events", {
 await analytics.stop();
 ```
 
+## Wildcard Tables
+
+The collector supports wildcard table names, which share a schema. For example, let's say we required a set of tables with custom events for specific games. We would define the schema for these table as follows:
+
+```ts
+type ExampleWildcardSchema = {
+	game_custom_event_$: { // <--- Notice the "$" wildcard token in the table name
+		event_time: Date;
+		event_type: string;
+		event_value: string;
+		session_id: string;
+	};
+}
+```
+
+When tracking events, supply a third parameter with the wildcard value, for example:
+
+```ts
+// Track a custom event for Pool
+analytics.track("game_custom_event_$", {
+	event_time: new Date(),
+	event_type: "foo",
+	event_value: "bar",
+	session_id: "9438b068-c25b-47a0-b0fe-e8acc6f80ace",
+}, "pool"); // <--- Notice the wildcard value
+
+// Track a custom event for Bowling
+analytics.track("game_custom_event_$", {
+	event_time: new Date(),
+	event_type: "foo",
+	event_value: "bar",
+	session_id: "9438b068-c25b-47a0-b0fe-e8acc6f80ace",
+}, "bowling"); // <--- Same schema, different wildcard value
+```
+
+This will result in two separate tables of data: `game_custom_event_pool` and `game_custom_event_bowing` (yet both sharing the schema defined for `game_custom_event_$`).
+
 ## Specification
 
 ### Objects
