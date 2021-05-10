@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>FlushTrigger | @plato/analytics</title>
+	<title>DataType | @plato/analytics</title>
 	<meta name="description" content="Documentation for @plato/analytics">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,10 +55,10 @@
 					<a href="../modules.html">@plato/analytics</a>
 				</li>
 				<li>
-					<a href="flushtrigger.html">FlushTrigger</a>
+					<a href="datatype.html">DataType</a>
 				</li>
 			</ul>
-			<h1>Enumeration FlushTrigger</h1>
+			<h1>Enumeration DataType</h1>
 		</div>
 	</div>
 </header>
@@ -68,7 +68,7 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Possible triggers for a batch flush</p>
+						<p>Valid data types for record fields</p>
 					</div>
 				</div>
 			</section>
@@ -79,10 +79,12 @@
 						<section class="tsd-index-section ">
 							<h3>Enumeration members</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="flushtrigger.html#agelimit" class="tsd-kind-icon">Age<wbr>Limit</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="flushtrigger.html#backpressure" class="tsd-kind-icon">Backpressure</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="flushtrigger.html#recordlimit" class="tsd-kind-icon">Record<wbr>Limit</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="flushtrigger.html#stop" class="tsd-kind-icon">Stop</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="datatype.html#boolean" class="tsd-kind-icon">Boolean</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="datatype.html#float" class="tsd-kind-icon">Float</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="datatype.html#integer" class="tsd-kind-icon">Integer</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="datatype.html#string" class="tsd-kind-icon">String</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="datatype.html#time" class="tsd-kind-icon">Time</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="datatype.html#uuid" class="tsd-kind-icon">UUID</a></li>
 							</ul>
 						</section>
 					</div>
@@ -91,64 +93,64 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Enumeration members</h2>
 				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="agelimit" class="tsd-anchor"></a>
-					<h3>Age<wbr>Limit</h3>
-					<div class="tsd-signature tsd-kind-icon">Age<wbr>Limit<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;limit_age&quot;</span></div>
+					<a name="boolean" class="tsd-anchor"></a>
+					<h3>Boolean</h3>
+					<div class="tsd-signature tsd-kind-icon">Boolean<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;BOOLEAN&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/plato-app/es-analytics/blob/154dc00/lib/collector/Collector.ts#L18">collector/Collector.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/plato-app/es-analytics/blob/154dc00/lib/collector/Collector.ts#L39">collector/Collector.ts:39</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The batch met a specified limit of age</p>
-						</div>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="backpressure" class="tsd-anchor"></a>
-					<h3>Backpressure</h3>
-					<div class="tsd-signature tsd-kind-icon">Backpressure<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;backpressure&quot;</span></div>
+					<a name="float" class="tsd-anchor"></a>
+					<h3>Float</h3>
+					<div class="tsd-signature tsd-kind-icon">Float<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;FLOAT&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/plato-app/es-analytics/blob/154dc00/lib/collector/Collector.ts#L20">collector/Collector.ts:20</a></li>
+							<li>Defined in <a href="https://github.com/plato-app/es-analytics/blob/154dc00/lib/collector/Collector.ts#L37">collector/Collector.ts:37</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The underlying write stream is backed up</p>
-						</div>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="recordlimit" class="tsd-anchor"></a>
-					<h3>Record<wbr>Limit</h3>
-					<div class="tsd-signature tsd-kind-icon">Record<wbr>Limit<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;limit_records&quot;</span></div>
+					<a name="integer" class="tsd-anchor"></a>
+					<h3>Integer</h3>
+					<div class="tsd-signature tsd-kind-icon">Integer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;INTEGER&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/plato-app/es-analytics/blob/154dc00/lib/collector/Collector.ts#L16">collector/Collector.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/plato-app/es-analytics/blob/154dc00/lib/collector/Collector.ts#L36">collector/Collector.ts:36</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The batch met a specified limit of records</p>
-						</div>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="stop" class="tsd-anchor"></a>
-					<h3>Stop</h3>
-					<div class="tsd-signature tsd-kind-icon">Stop<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;stop&quot;</span></div>
+					<a name="string" class="tsd-anchor"></a>
+					<h3>String</h3>
+					<div class="tsd-signature tsd-kind-icon">String<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;STRING&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/plato-app/es-analytics/blob/154dc00/lib/collector/Collector.ts#L14">collector/Collector.ts:14</a></li>
+							<li>Defined in <a href="https://github.com/plato-app/es-analytics/blob/154dc00/lib/collector/Collector.ts#L35">collector/Collector.ts:35</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Collector was stopped</p>
-						</div>
-					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="time" class="tsd-anchor"></a>
+					<h3>Time</h3>
+					<div class="tsd-signature tsd-kind-icon">Time<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;TIME&quot;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/plato-app/es-analytics/blob/154dc00/lib/collector/Collector.ts#L38">collector/Collector.ts:38</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="uuid" class="tsd-anchor"></a>
+					<h3>UUID</h3>
+					<div class="tsd-signature tsd-kind-icon">UUID<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;UUID&quot;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/plato-app/es-analytics/blob/154dc00/lib/collector/Collector.ts#L40">collector/Collector.ts:40</a></li>
+						</ul>
+					</aside>
 				</section>
 			</section>
 		</div>
@@ -162,30 +164,36 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-enum">
-						<a href="datatype.html" class="tsd-kind-icon">Data<wbr>Type</a>
-					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-enum">
-						<a href="flushtrigger.html" class="tsd-kind-icon">Flush<wbr>Trigger</a>
+						<a href="datatype.html" class="tsd-kind-icon">Data<wbr>Type</a>
 						<ul>
 							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="flushtrigger.html#agelimit" class="tsd-kind-icon">Age<wbr>Limit</a>
+								<a href="datatype.html#boolean" class="tsd-kind-icon">Boolean</a>
 							</li>
 							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="flushtrigger.html#backpressure" class="tsd-kind-icon">Backpressure</a>
+								<a href="datatype.html#float" class="tsd-kind-icon">Float</a>
 							</li>
 							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="flushtrigger.html#recordlimit" class="tsd-kind-icon">Record<wbr>Limit</a>
+								<a href="datatype.html#integer" class="tsd-kind-icon">Integer</a>
 							</li>
 							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="flushtrigger.html#stop" class="tsd-kind-icon">Stop</a>
+								<a href="datatype.html#string" class="tsd-kind-icon">String</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="datatype.html#time" class="tsd-kind-icon">Time</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="datatype.html#uuid" class="tsd-kind-icon">UUID</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-enum">
+						<a href="flushtrigger.html" class="tsd-kind-icon">Flush<wbr>Trigger</a>
+					</li>
 					<li class=" tsd-kind-class tsd-has-type-parameter">
 						<a href="../classes/collector.html" class="tsd-kind-icon">Collector</a>
 					</li>
