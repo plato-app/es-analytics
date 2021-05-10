@@ -1,6 +1,6 @@
 import { join } from "path";
 import * as tape from "tape";
-import { Collector, StoreFS } from "..";
+import { Collector, StoreFS, DataType } from "..";
 
 /** Test schema */
 type TestSchema = {
@@ -27,15 +27,16 @@ const store = new StoreFS(join(__dirname, "store"));
 
 tape("Collector", async (t) => {
 	const analytics = new Collector<TestSchema>(store, {
+		batchZip: false,
 		columnTypes: {
 			game_user_event: {
-				session_id: "uuid",
+				session_id: DataType.UUID,
 			},
 			game_session_create: {
-				session_id: "uuid",
+				session_id: DataType.UUID,
 			},
 			game_custom_event_$: {
-				session_id: "uuid",
+				session_id: DataType.UUID,
 			},
 		},
 	});
@@ -76,13 +77,14 @@ tape("Collector", async (t) => {
 
 tape("Collector 2", async (t) => {
 	const analytics = new Collector<TestSchema>(store, {
+		batchZip: false,
 		batchRecordLimit: 10000,
 		columnTypes: {
 			game_user_event: {
-				psession_id: "uuid",
+				session_id: DataType.UUID,
 			},
 			game_session_create: {
-				psession_id: "uuid",
+				session_id: DataType.UUID,
 			},
 		},
 	});

@@ -30,13 +30,25 @@ export type CollectorSchema = {
 	[index: string]: TableRecord;
 }
 
+/** Valid data types for record fields */
+export enum DataType {
+	String = "STRING",
+	Integer = "INTEGER",
+	Float = "FLOAT",
+	Time = "TIME",
+	Boolean = "BOOLEAN",
+	UUID = "UUID",
+}
+
 /** Map of column type overrides, indexed by table name */
-export type TableColumnTypes = Record<string, Record<string, string>>;
+export type TableColumnTypes<T> = {
+	[Property in keyof T]: Record<keyof T[keyof T], DataType>;
+};
 
 /** Collector configuration */
-export interface CollectorConfig {
+export interface CollectorConfig<T> {
 	/** Column type overrides */
-	columnTypes?: TableColumnTypes;
+	columnTypes?: TableColumnTypes<T>;
 	/** Whether or not to gzip batch data */
 	batchZip?: boolean;
 	/** Record limit at which batches are automatically flushed */
@@ -98,13 +110,15 @@ function finishBatch(batch: TableBatch): Promise<void> {
 }
 
 /** Infer column types from values */
-function inferColumnType(value: unknown): string {
+function inferColumnType(value: unknown): DataType {
 	if (value instanceof Date) {
-		return "timestampz";
+		return DataType.Time;
 	} else if (typeof value === "number") {
-		return "numeric";
+		return Number.isInteger(value) ? DataType.Integer : DataType.Float;
+	} else if (typeof value === "boolean") {
+		return DataType.Boolean;
 	} else {
-		return "text";
+		return DataType.String;
 	}
 }
 
@@ -143,7 +157,7 @@ export class Collector<T extends CollectorSchema> {
 	private readonly store: Store;
 
 	/** Column type overrides */
-	private readonly columnTypes: TableColumnTypes | undefined;
+	private readonly columnTypes: TableColumnTypes<CollectorSchema> | undefined;
 
 	/** Whether or not to zip batches */
 	private readonly batchZip: boolean;
@@ -157,7 +171,7 @@ export class Collector<T extends CollectorSchema> {
 	/** Whether or not the collector is collecting data */
 	private disabled = false;
 
-	constructor(store: Store, config?: CollectorConfig) {
+	constructor(store: Store, config?: CollectorConfig<CollectorSchema>) {
 		this.store = store;
 		this.columnTypes = config?.columnTypes;
 		this.batchZip = config?.batchZip ?? true;
