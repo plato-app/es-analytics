@@ -1,7 +1,7 @@
 {
 	"name": "@plato/analytics",
-	"version": "0.1.2",
-	"description": "Track custom analytics",
+	"version": "0.1.3",
+	"description": "Track custom analytics in Node.js, and persist to long-term storage",
 	"keywords": [
 		"analytics",
 		"data lake",

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.3
+
+* :bug: Fix CSV header data types
+
 ## 0.1.2
 
 * :bug: Strip temp file prefix from storage keys
