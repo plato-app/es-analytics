@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.4
+
+* :lock: Update dependencies
+
 ## 0.1.3
 
 * :bug: Fix CSV header data types
