@@ -1,275 +1,74 @@
-<!doctype html>
-<html class="default no-js">
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>@plato/analytics</title>
-	<meta name="description" content="Documentation for @plato/analytics">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="assets/css/main.css">
-	<script async src="assets/js/search.js" id="search-script"></script>
-</head>
-<body>
-<header>
-	<div class="tsd-page-toolbar">
-		<div class="container">
-			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
-					<div class="field">
-						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
-						<input id="tsd-search-field" type="text" />
-					</div>
-					<ul class="results">
-						<li class="state loading">Preparing search index...</li>
-						<li class="state failure">The search index is not available</li>
-					</ul>
-					<a href="index.html" class="title">@plato/analytics</a>
-				</div>
-				<div class="table-cell" id="tsd-widgets">
-					<div id="tsd-filter">
-						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
-						<div class="tsd-filter-group">
-							<div class="tsd-select" id="tsd-filter-visibility">
-								<span class="tsd-select-label">All</span>
-								<ul class="tsd-select-list">
-									<li data-value="public">Public</li>
-									<li data-value="protected">Public/Protected</li>
-									<li data-value="private" class="selected">All</li>
-								</ul>
-							</div>
-							<input type="checkbox" id="tsd-filter-inherited" checked />
-							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
-							<input type="checkbox" id="tsd-filter-externals" checked />
-							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
-						</div>
-					</div>
-					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="tsd-page-title">
-		<div class="container">
-			<h1>@plato/analytics</h1>
-		</div>
-	</div>
-</header>
-<div class="container container-main">
-	<div class="row">
-		<div class="col-8 col-content">
-			<div class="tsd-panel tsd-typography">
-				<a href="#platoanalytics" id="platoanalytics" style="color: inherit; text-decoration: none;">
-					<h1>@plato/analytics</h1>
-				</a>
-				<p><a href="https://github.com/plato-app/es-analytics/actions/workflows/node.yml"><img src="https://github.com/plato-app/es-analytics/actions/workflows/node.yml/badge.svg" alt="Node.js CI"></a> <a href="https://badge.fury.io/js/%40plato%2Fanalytics"><img src="https://badge.fury.io/js/%40plato%2Fanalytics.svg" alt="npm version"></a></p>
-				<p>Track custom analytics in <a href="https://nodejs.org/en/">Node.js</a>, and persist to long-term storage, such as a <a href="https://en.wikipedia.org/wiki/Data_lake">data lake</a>.</p>
-				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
-					<h2>Usage</h2>
-				</a>
-				<p>Install via Yarn (or npm):</p>
-				<pre><code class="language-sh"><span style="color: #000000">yarn add @plato/analytics</span>
+<!DOCTYPE html><html class="default"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>@plato/analytics</title><meta name="description" content="Documentation for @plato/analytics"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.body.classList.add(localStorage.getItem("tsd-theme") || "os")</script><header><div class="tsd-page-toolbar"><div class="container"><div class="table-wrap"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption">Search</label><input type="text" id="tsd-search-field"/></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">@plato/analytics</a></div><div class="table-cell" id="tsd-widgets"><div id="tsd-filter"><a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a><div class="tsd-filter-group"><div class="tsd-select" id="tsd-filter-visibility"><span class="tsd-select-label">All</span><ul class="tsd-select-list"><li data-value="public">Public</li><li data-value="protected">Public/Protected</li><li data-value="private" class="selected">All</li></ul></div> <input type="checkbox" id="tsd-filter-inherited" checked/><label class="tsd-widget" for="tsd-filter-inherited">Inherited</label><input type="checkbox" id="tsd-filter-externals" checked/><label class="tsd-widget" for="tsd-filter-externals">Externals</label></div></div><a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a></div></div></div></div><div class="tsd-page-title"><div class="container"><h1>@plato/analytics</h1></div></div></header><div class="container container-main"><div class="row"><div class="col-8 col-content"><div class="tsd-panel tsd-typography">
+<a href="#platoanalytics" id="platoanalytics" style="color: inherit; text-decoration: none;">
+  <h1>@plato/analytics</h1>
+</a>
+<p><a href="https://github.com/plato-app/es-analytics/actions/workflows/node.yml"><img src="https://github.com/plato-app/es-analytics/actions/workflows/node.yml/badge.svg" alt="Node.js CI"></a> <a href="https://badge.fury.io/js/%40plato%2Fanalytics"><img src="https://badge.fury.io/js/%40plato%2Fanalytics.svg" alt="npm version"></a></p>
+<p>Track custom analytics in <a href="https://nodejs.org/en/">Node.js</a>, and persist to long-term storage, such as a <a href="https://en.wikipedia.org/wiki/Data_lake">data lake</a>.</p>
+
+<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+  <h2>Usage</h2>
+</a>
+<p>Install via Yarn (or npm):</p>
+<pre><code class="language-sh"><span class="hl-0">yarn add @plato/analytics</span>
 </code></pre>
-				<p>Define a schema, create a collector, and store events in S3:</p>
-				<pre><code class="language-ts"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Collector</span><span style="color: #000000">, </span><span style="color: #001080">StoreS3</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@plato/analytics&quot;</span><span style="color: #000000">;</span>
-
-<span style="color: #008000">// STEP 1: Create a schema for your data =======================================</span>
-<span style="color: #008000">// This will give you strong typing when calling .track</span>
-
-<span style="color: #008000">/** Demo analytics schema */</span>
-<span style="color: #0000FF">type</span><span style="color: #000000"> </span><span style="color: #267F99">ExampleSchema</span><span style="color: #000000"> = {</span>
-<span style="color: #000000">    </span><span style="color: #008000">/** A table of user events associated with a resource */</span>
-<span style="color: #000000">    </span><span style="color: #001080">user_events</span><span style="color: #000000">: {</span>
-<span style="color: #000000">        </span><span style="color: #008000">/** The time at which the event occurred */</span>
-<span style="color: #000000">        </span><span style="color: #001080">event_time</span><span style="color: #000000">: </span><span style="color: #267F99">Date</span><span style="color: #000000">;</span>
-<span style="color: #000000">        </span><span style="color: #008000">/** The type of event which occurred */</span>
-<span style="color: #000000">        </span><span style="color: #001080">event_type</span><span style="color: #000000">: </span><span style="color: #267F99">string</span><span style="color: #000000">;</span>
-<span style="color: #000000">        </span><span style="color: #008000">/** A resource ID associated with this event */</span>
-<span style="color: #000000">        </span><span style="color: #001080">resource_id</span><span style="color: #000000">: </span><span style="color: #267F99">string</span><span style="color: #000000">;</span>
-<span style="color: #000000">        </span><span style="color: #008000">/** A user ID who performed the event */</span>
-<span style="color: #000000">        </span><span style="color: #001080">user_id</span><span style="color: #000000">: </span><span style="color: #267F99">string</span><span style="color: #000000">;</span>
-<span style="color: #000000">    };</span>
-<span style="color: #000000">};</span>
-
-<span style="color: #008000">// STEP 2: Create a long-term data store =======================================</span>
-<span style="color: #008000">// Batches of analytics data are sent to long term storage when they reach</span>
-<span style="color: #008000">// specified thresholds, or when the analytics collector is stopped</span>
-
-<span style="color: #008000">// Create S3 storage layer which writes data to a specified bucket</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">store</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">StoreS3</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;my_bucket&quot;</span><span style="color: #000000">);</span>
-
-<span style="color: #008000">// STEP 3: Create an analytics collector =======================================</span>
-
-<span style="color: #008000">// Create analytics collector respecting our DemoSchema</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">analytics</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Collector</span><span style="color: #000000">&lt;</span><span style="color: #267F99">ExampleSchema</span><span style="color: #000000">&gt;(</span><span style="color: #001080">store</span><span style="color: #000000">);</span>
-
-<span style="color: #008000">// Receive errors from the collector</span>
-<span style="color: #001080">analytics</span><span style="color: #000000">.</span><span style="color: #001080">onError</span><span style="color: #000000">.</span><span style="color: #795E26">receive</span><span style="color: #000000">((</span><span style="color: #001080">e</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">`ERROR: </span><span style="color: #0000FF">${</span><span style="color: #001080">e</span><span style="color: #000000FF">.</span><span style="color: #001080">message</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #000000">));</span>
-
-<span style="color: #008000">// Receive flush notifications from the collector</span>
-<span style="color: #001080">analytics</span><span style="color: #000000">.</span><span style="color: #001080">onFlush</span><span style="color: #000000">.</span><span style="color: #795E26">receive</span><span style="color: #000000">((</span><span style="color: #001080">info</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">`FLUSH: </span><span style="color: #0000FF">${</span><span style="color: #267F99">JSON</span><span style="color: #000000FF">.</span><span style="color: #795E26">stringify</span><span style="color: #000000FF">(</span><span style="color: #001080">info</span><span style="color: #000000FF">)</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #000000">));</span>
-
-<span style="color: #008000">// STEP 4: TRACK ALL THE THINGS! ===============================================</span>
-
-<span style="color: #008000">// Track a demo event, for example</span>
-<span style="color: #001080">analytics</span><span style="color: #000000">.</span><span style="color: #795E26">track</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;user_events&quot;</span><span style="color: #000000">, {</span>
-<span style="color: #000000">    </span><span style="color: #001080">event_time:</span><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #267F99">Date</span><span style="color: #000000">(),</span>
-<span style="color: #000000">    </span><span style="color: #001080">event_type:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;touch&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">    </span><span style="color: #001080">resource_id:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;9438b068-c25b-47a0-b0fe-e8acc6f80ace&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">    </span><span style="color: #001080">user_id:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;03d00e69-ea1e-4c39-ade6-803ff3f00e99&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">});</span>
-
-<span style="color: #008000">// STEP 5: Stop the collector ==================================================</span>
-
-<span style="color: #008000">// Stop collecting and wait for graceful shutdown</span>
-<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">analytics</span><span style="color: #000000">.</span><span style="color: #795E26">stop</span><span style="color: #000000">();</span>
+<p>Define a schema, create a collector, and store events in S3:</p>
+<pre><code class="language-ts"><span class="hl-1">import</span><span class="hl-0"> { </span><span class="hl-2">Collector</span><span class="hl-0">, </span><span class="hl-2">StoreS3</span><span class="hl-0"> } </span><span class="hl-1">from</span><span class="hl-0"> </span><span class="hl-3">&quot;@plato/analytics&quot;</span><span class="hl-0">;</span><br/><br/><span class="hl-4">// STEP 1: Create a schema for your data =======================================</span><br/><span class="hl-4">// This will give you strong typing when calling .track</span><br/><br/><span class="hl-4">/** Demo analytics schema */</span><br/><span class="hl-5">type</span><span class="hl-0"> </span><span class="hl-6">ExampleSchema</span><span class="hl-0"> = {</span><br/><span class="hl-0">    </span><span class="hl-4">/** A table of user events associated with a resource */</span><br/><span class="hl-0">    </span><span class="hl-2">user_events</span><span class="hl-0">: {</span><br/><span class="hl-0">        </span><span class="hl-4">/** The time at which the event occurred */</span><br/><span class="hl-0">        </span><span class="hl-2">event_time</span><span class="hl-0">: </span><span class="hl-6">Date</span><span class="hl-0">;</span><br/><span class="hl-0">        </span><span class="hl-4">/** The type of event which occurred */</span><br/><span class="hl-0">        </span><span class="hl-2">event_type</span><span class="hl-0">: </span><span class="hl-6">string</span><span class="hl-0">;</span><br/><span class="hl-0">        </span><span class="hl-4">/** A resource ID associated with this event */</span><br/><span class="hl-0">        </span><span class="hl-2">resource_id</span><span class="hl-0">: </span><span class="hl-6">string</span><span class="hl-0">;</span><br/><span class="hl-0">        </span><span class="hl-4">/** A user ID who performed the event */</span><br/><span class="hl-0">        </span><span class="hl-2">user_id</span><span class="hl-0">: </span><span class="hl-6">string</span><span class="hl-0">;</span><br/><span class="hl-0">    };</span><br/><span class="hl-0">};</span><br/><br/><span class="hl-4">// STEP 2: Create a long-term data store =======================================</span><br/><span class="hl-4">// Batches of analytics data are sent to long term storage when they reach</span><br/><span class="hl-4">// specified thresholds, or when the analytics collector is stopped</span><br/><br/><span class="hl-4">// Create S3 storage layer which writes data to a specified bucket</span><br/><span class="hl-5">const</span><span class="hl-0"> </span><span class="hl-7">store</span><span class="hl-0"> = </span><span class="hl-5">new</span><span class="hl-0"> </span><span class="hl-8">StoreS3</span><span class="hl-0">(</span><span class="hl-3">&quot;my_bucket&quot;</span><span class="hl-0">);</span><br/><br/><span class="hl-4">// STEP 3: Create an analytics collector =======================================</span><br/><br/><span class="hl-4">// Create analytics collector respecting our DemoSchema</span><br/><span class="hl-5">const</span><span class="hl-0"> </span><span class="hl-7">analytics</span><span class="hl-0"> = </span><span class="hl-5">new</span><span class="hl-0"> </span><span class="hl-8">Collector</span><span class="hl-0">&lt;</span><span class="hl-6">ExampleSchema</span><span class="hl-0">&gt;(</span><span class="hl-2">store</span><span class="hl-0">);</span><br/><br/><span class="hl-4">// Receive errors from the collector</span><br/><span class="hl-2">analytics</span><span class="hl-0">.</span><span class="hl-2">onError</span><span class="hl-0">.</span><span class="hl-8">receive</span><span class="hl-0">((</span><span class="hl-2">e</span><span class="hl-0">) </span><span class="hl-5">=&gt;</span><span class="hl-0"> </span><span class="hl-2">console</span><span class="hl-0">.</span><span class="hl-8">log</span><span class="hl-0">(</span><span class="hl-3">`ERROR: </span><span class="hl-5">${</span><span class="hl-2">e</span><span class="hl-9">.</span><span class="hl-2">message</span><span class="hl-5">}</span><span class="hl-3">`</span><span class="hl-0">));</span><br/><br/><span class="hl-4">// Receive flush notifications from the collector</span><br/><span class="hl-2">analytics</span><span class="hl-0">.</span><span class="hl-2">onFlush</span><span class="hl-0">.</span><span class="hl-8">receive</span><span class="hl-0">((</span><span class="hl-2">info</span><span class="hl-0">) </span><span class="hl-5">=&gt;</span><span class="hl-0"> </span><span class="hl-2">console</span><span class="hl-0">.</span><span class="hl-8">log</span><span class="hl-0">(</span><span class="hl-3">`FLUSH: </span><span class="hl-5">${</span><span class="hl-6">JSON</span><span class="hl-9">.</span><span class="hl-8">stringify</span><span class="hl-9">(</span><span class="hl-2">info</span><span class="hl-9">)</span><span class="hl-5">}</span><span class="hl-3">`</span><span class="hl-0">));</span><br/><br/><span class="hl-4">// STEP 4: TRACK ALL THE THINGS! ===============================================</span><br/><br/><span class="hl-4">// Track a demo event, for example</span><br/><span class="hl-2">analytics</span><span class="hl-0">.</span><span class="hl-8">track</span><span class="hl-0">(</span><span class="hl-3">&quot;user_events&quot;</span><span class="hl-0">, {</span><br/><span class="hl-0">    </span><span class="hl-2">event_time:</span><span class="hl-0"> </span><span class="hl-5">new</span><span class="hl-0"> </span><span class="hl-6">Date</span><span class="hl-0">(),</span><br/><span class="hl-0">    </span><span class="hl-2">event_type:</span><span class="hl-0"> </span><span class="hl-3">&quot;touch&quot;</span><span class="hl-0">,</span><br/><span class="hl-0">    </span><span class="hl-2">resource_id:</span><span class="hl-0"> </span><span class="hl-3">&quot;9438b068-c25b-47a0-b0fe-e8acc6f80ace&quot;</span><span class="hl-0">,</span><br/><span class="hl-0">    </span><span class="hl-2">user_id:</span><span class="hl-0"> </span><span class="hl-3">&quot;03d00e69-ea1e-4c39-ade6-803ff3f00e99&quot;</span><span class="hl-0">,</span><br/><span class="hl-0">});</span><br/><br/><span class="hl-4">// STEP 5: Stop the collector ==================================================</span><br/><br/><span class="hl-4">// Stop collecting and wait for graceful shutdown</span><br/><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">analytics</span><span class="hl-0">.</span><span class="hl-8">stop</span><span class="hl-0">();</span>
 </code></pre>
-				<p>See the <a href="https://plato-app.github.io/es-signal/">API Reference</a> for more information.</p>
-				<a href="#wildcard-tables" id="wildcard-tables" style="color: inherit; text-decoration: none;">
-					<h2>Wildcard Tables</h2>
-				</a>
-				<p>The collector supports wildcard table names, which share a schema. For example, let&#39;s say we required a set of tables with custom events for specific games. We would define the schema for these table as follows:</p>
-				<pre><code class="language-ts"><span style="color: #0000FF">type</span><span style="color: #000000"> </span><span style="color: #267F99">ExampleWildcardSchema</span><span style="color: #000000"> = {</span>
-<span style="color: #000000">    </span><span style="color: #001080">game_custom_event_$</span><span style="color: #000000">: { </span><span style="color: #008000">// &lt;--- Notice the &quot;$&quot; wildcard token in the table name</span>
-<span style="color: #000000">        </span><span style="color: #001080">event_time</span><span style="color: #000000">: </span><span style="color: #267F99">Date</span><span style="color: #000000">;</span>
-<span style="color: #000000">        </span><span style="color: #001080">event_type</span><span style="color: #000000">: </span><span style="color: #267F99">string</span><span style="color: #000000">;</span>
-<span style="color: #000000">        </span><span style="color: #001080">event_value</span><span style="color: #000000">: </span><span style="color: #267F99">string</span><span style="color: #000000">;</span>
-<span style="color: #000000">        </span><span style="color: #001080">session_id</span><span style="color: #000000">: </span><span style="color: #267F99">string</span><span style="color: #000000">;</span>
-<span style="color: #000000">    };</span>
-<span style="color: #000000">}</span>
-</code></pre>
-				<p>When tracking events, supply a third parameter with the wildcard value, for example:</p>
-				<pre><code class="language-ts"><span style="color: #008000">// Track a custom event for Pool</span>
-<span style="color: #001080">analytics</span><span style="color: #000000">.</span><span style="color: #795E26">track</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;game_custom_event_$&quot;</span><span style="color: #000000">, {</span>
-<span style="color: #000000">    </span><span style="color: #001080">event_time:</span><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #267F99">Date</span><span style="color: #000000">(),</span>
-<span style="color: #000000">    </span><span style="color: #001080">event_type:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;foo&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">    </span><span style="color: #001080">event_value:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;bar&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">    </span><span style="color: #001080">session_id:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;9438b068-c25b-47a0-b0fe-e8acc6f80ace&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">}, </span><span style="color: #A31515">&quot;pool&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// &lt;--- Notice the wildcard value</span>
+<p>See the <a href="https://plato-app.github.io/es-signal/">API Reference</a> for more information.</p>
 
-<span style="color: #008000">// Track a custom event for Bowling</span>
-<span style="color: #001080">analytics</span><span style="color: #000000">.</span><span style="color: #795E26">track</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;game_custom_event_$&quot;</span><span style="color: #000000">, {</span>
-<span style="color: #000000">    </span><span style="color: #001080">event_time:</span><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #267F99">Date</span><span style="color: #000000">(),</span>
-<span style="color: #000000">    </span><span style="color: #001080">event_type:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;foo&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">    </span><span style="color: #001080">event_value:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;bar&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">    </span><span style="color: #001080">session_id:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;9438b068-c25b-47a0-b0fe-e8acc6f80ace&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">}, </span><span style="color: #A31515">&quot;bowling&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// &lt;--- Same schema, different wildcard value</span>
+<a href="#wildcard-tables" id="wildcard-tables" style="color: inherit; text-decoration: none;">
+  <h2>Wildcard Tables</h2>
+</a>
+<p>The collector supports wildcard table names, which share a schema. For example, let&#39;s say we required a set of tables with custom events for specific games. We would define the schema for these table as follows:</p>
+<pre><code class="language-ts"><span class="hl-5">type</span><span class="hl-0"> </span><span class="hl-6">ExampleWildcardSchema</span><span class="hl-0"> = {</span><br/><span class="hl-0">    </span><span class="hl-2">game_custom_event_$</span><span class="hl-0">: { </span><span class="hl-4">// &lt;--- Notice the &quot;$&quot; wildcard token in the table name</span><br/><span class="hl-0">        </span><span class="hl-2">event_time</span><span class="hl-0">: </span><span class="hl-6">Date</span><span class="hl-0">;</span><br/><span class="hl-0">        </span><span class="hl-2">event_type</span><span class="hl-0">: </span><span class="hl-6">string</span><span class="hl-0">;</span><br/><span class="hl-0">        </span><span class="hl-2">event_value</span><span class="hl-0">: </span><span class="hl-6">string</span><span class="hl-0">;</span><br/><span class="hl-0">        </span><span class="hl-2">session_id</span><span class="hl-0">: </span><span class="hl-6">string</span><span class="hl-0">;</span><br/><span class="hl-0">    };</span><br/><span class="hl-0">}</span>
 </code></pre>
-				<p>This will result in two separate tables of data: <code>game_custom_event_pool</code> and <code>game_custom_event_bowing</code> (yet both sharing the schema defined for <code>game_custom_event_$</code>).</p>
-				<a href="#specification" id="specification" style="color: inherit; text-decoration: none;">
-					<h2>Specification</h2>
-				</a>
-				<a href="#objects" id="objects" style="color: inherit; text-decoration: none;">
-					<h3>Objects</h3>
-				</a>
-				<p>Objects are files within a data lake (such as AWS S3). Each object uploaded to the data lake will conform to the following specifications:</p>
-				<ol>
-					<li>Contain data for a single table adhering to the <a href="#csv-format">defined CSV format</a></li>
-					<li>Compressed with gzip</li>
-					<li>Object key names must conform to the following format: <code>YYYY/MM/DD/HH/{TABLE_NAME}/{GUID}.csv(.gz)</code><ul>
-							<li><code>YYYY/MM/DD/HH</code> is the 4 digit year, 2 digit month, 2 digit day, and 2 digit hour of the UTC time when this object was created</li>
-							<li><code>{TABLE_NAME}</code> must be unique across all data sources within this lake and contain only alphanumeric characters and underscores, e.g. <code>[a-zA-Z0-9_]</code></li>
-							<li>Per convention, <code>{TABLE_NAME}</code> should contain a unique prefix indicating the data source, e.g. <code>game_*</code></li>
-							<li><code>{GUID}</code> is a Version 4 GUID</li>
-						</ul>
-					</li>
-				</ol>
-				<a href="#csv-format" id="csv-format" style="color: inherit; text-decoration: none;">
-					<h3>CSV Format</h3>
-				</a>
-				<p>CSV files uploaded to the data lake will adhere to the following specifications:</p>
-				<ol>
-					<li>Conform to <a href="https://tools.ietf.org/html/rfc4180">RFC 4180 - Common Format for Comma-Separated Values</a></li>
-					<li>Contain only records for a single table</li>
-					<li>Column headers must be declared in the first non-comment line</li>
-					<li>Column headers must contain only alphanumeric characters (<code>[a-zA-Z0-9]</code>) and underscores (<code>_</code>)</li>
-					<li>Column types should be declared as a comment in the first line, with the following specifications:<ul>
-							<li>Aside from the comment character (<code>#</code>), the types row must contain a comma-separated list of text values indicating the column&#39;s data type</li>
-							<li>   Valid data types are as follows:     * <code>text</code>     * <code>timestamp(z)</code>     * <code>int</code></li>
-						</ul>
-					</li>
-				</ol>
-				<a href="#example-csv-data" id="example-csv-data" style="color: inherit; text-decoration: none;">
-					<h4>Example CSV Data</h4>
-				</a>
-				<pre><code><span style="color: #000000">#</span><span style="color: #001080">text</span><span style="color: #000000">,</span><span style="color: #001080">timestampz</span><span style="color: #000000">,</span><span style="color: #001080">int</span>
-<span style="color: #001080">session_id</span><span style="color: #000000">,</span><span style="color: #001080">end_time</span><span style="color: #000000">,</span><span style="color: #001080">end_reason</span>
-<span style="color: #001080">oiccvmz0cvuu</span><span style="color: #000000">-2</span><span style="color: #001080">my7wvf99enmi</span><span style="color: #000000">,</span><span style="color: #098658">2020</span><span style="color: #000000">-</span><span style="color: #098658">06</span><span style="color: #000000">-08T17:</span><span style="color: #098658">13</span><span style="color: #000000">:49.062</span><span style="color: #0070C1">Z</span><span style="color: #000000">,</span><span style="color: #098658">0</span>
-<span style="color: #000000">2</span><span style="color: #001080">slv18vtkjyl4</span><span style="color: #000000">-28</span><span style="color: #001080">nz20jhsdt3w</span><span style="color: #000000">,</span><span style="color: #098658">2020</span><span style="color: #000000">-</span><span style="color: #098658">06</span><span style="color: #000000">-08T17:</span><span style="color: #098658">13</span><span style="color: #000000">:49.112</span><span style="color: #0070C1">Z</span><span style="color: #000000">,</span><span style="color: #098658">2</span>
-<span style="color: #000000">2</span><span style="color: #001080">jk1eocbnkcys</span><span style="color: #000000">-2</span><span style="color: #001080">zffiy4q44z4o</span><span style="color: #000000">,</span><span style="color: #098658">2020</span><span style="color: #000000">-</span><span style="color: #098658">06</span><span style="color: #000000">-08T17:</span><span style="color: #098658">13</span><span style="color: #000000">:49.523</span><span style="color: #0070C1">Z</span><span style="color: #000000">,</span><span style="color: #098658">0</span>
+<p>When tracking events, supply a third parameter with the wildcard value, for example:</p>
+<pre><code class="language-ts"><span class="hl-4">// Track a custom event for Pool</span><br/><span class="hl-2">analytics</span><span class="hl-0">.</span><span class="hl-8">track</span><span class="hl-0">(</span><span class="hl-3">&quot;game_custom_event_$&quot;</span><span class="hl-0">, {</span><br/><span class="hl-0">    </span><span class="hl-2">event_time:</span><span class="hl-0"> </span><span class="hl-5">new</span><span class="hl-0"> </span><span class="hl-6">Date</span><span class="hl-0">(),</span><br/><span class="hl-0">    </span><span class="hl-2">event_type:</span><span class="hl-0"> </span><span class="hl-3">&quot;foo&quot;</span><span class="hl-0">,</span><br/><span class="hl-0">    </span><span class="hl-2">event_value:</span><span class="hl-0"> </span><span class="hl-3">&quot;bar&quot;</span><span class="hl-0">,</span><br/><span class="hl-0">    </span><span class="hl-2">session_id:</span><span class="hl-0"> </span><span class="hl-3">&quot;9438b068-c25b-47a0-b0fe-e8acc6f80ace&quot;</span><span class="hl-0">,</span><br/><span class="hl-0">}, </span><span class="hl-3">&quot;pool&quot;</span><span class="hl-0">); </span><span class="hl-4">// &lt;--- Notice the wildcard value</span><br/><br/><span class="hl-4">// Track a custom event for Bowling</span><br/><span class="hl-2">analytics</span><span class="hl-0">.</span><span class="hl-8">track</span><span class="hl-0">(</span><span class="hl-3">&quot;game_custom_event_$&quot;</span><span class="hl-0">, {</span><br/><span class="hl-0">    </span><span class="hl-2">event_time:</span><span class="hl-0"> </span><span class="hl-5">new</span><span class="hl-0"> </span><span class="hl-6">Date</span><span class="hl-0">(),</span><br/><span class="hl-0">    </span><span class="hl-2">event_type:</span><span class="hl-0"> </span><span class="hl-3">&quot;foo&quot;</span><span class="hl-0">,</span><br/><span class="hl-0">    </span><span class="hl-2">event_value:</span><span class="hl-0"> </span><span class="hl-3">&quot;bar&quot;</span><span class="hl-0">,</span><br/><span class="hl-0">    </span><span class="hl-2">session_id:</span><span class="hl-0"> </span><span class="hl-3">&quot;9438b068-c25b-47a0-b0fe-e8acc6f80ace&quot;</span><span class="hl-0">,</span><br/><span class="hl-0">}, </span><span class="hl-3">&quot;bowling&quot;</span><span class="hl-0">); </span><span class="hl-4">// &lt;--- Same schema, different wildcard value</span>
 </code></pre>
-			</div>
-		</div>
-		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
-			<nav class="tsd-navigation primary">
-				<ul>
-					<li class=" ">
-						<a href="modules.html">Exports</a>
-					</li>
-				</ul>
-			</nav>
-			<nav class="tsd-navigation secondary menu-sticky">
-				<ul class="before-current">
-					<li class=" tsd-kind-enum">
-						<a href="enums/datatype.html" class="tsd-kind-icon">Data<wbr>Type</a>
-					</li>
-					<li class=" tsd-kind-enum">
-						<a href="enums/flushtrigger.html" class="tsd-kind-icon">Flush<wbr>Trigger</a>
-					</li>
-					<li class=" tsd-kind-class tsd-has-type-parameter">
-						<a href="classes/collector.html" class="tsd-kind-icon">Collector</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="classes/store.html" class="tsd-kind-icon">Store</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="classes/storefs.html" class="tsd-kind-icon">StoreFS</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="classes/stores3.html" class="tsd-kind-icon">Store<wbr>S3</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-has-type-parameter">
-						<a href="interfaces/collectorconfig.html" class="tsd-kind-icon">Collector<wbr>Config</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/flushinfo.html" class="tsd-kind-icon">Flush<wbr>Info</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#collectorschema" class="tsd-kind-icon">Collector<wbr>Schema</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
-						<a href="modules.html#tablecolumntypes" class="tsd-kind-icon">Table<wbr>Column<wbr>Types</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#tablerecord" class="tsd-kind-icon">Table<wbr>Record</a>
-					</li>
-				</ul>
-			</nav>
-		</div>
-	</div>
-</div>
-<footer class="with-border-bottom">
-	<div class="container">
-		<h2>Legend</h2>
-		<div class="tsd-legend-group">
-			<ul class="tsd-legend">
-				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
-			</ul>
-		</div>
-	</div>
-</footer>
-<div class="container tsd-generator">
-	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
-</div>
-<div class="overlay"></div>
-<script src="assets/js/main.js"></script>
-</body>
-</html>
+<p>This will result in two separate tables of data: <code>game_custom_event_pool</code> and <code>game_custom_event_bowing</code> (yet both sharing the schema defined for <code>game_custom_event_$</code>).</p>
+
+<a href="#specification" id="specification" style="color: inherit; text-decoration: none;">
+  <h2>Specification</h2>
+</a>
+
+<a href="#objects" id="objects" style="color: inherit; text-decoration: none;">
+  <h3>Objects</h3>
+</a>
+<p>Objects are files within a data lake (such as AWS S3). Each object uploaded to the data lake will conform to the following specifications:</p>
+<ol>
+<li>Contain data for a single table adhering to the <a href="#csv-format">defined CSV format</a></li>
+<li>Compressed with gzip</li>
+<li>Object key names must conform to the following format: <code>YYYY/MM/DD/HH/{TABLE_NAME}/{GUID}.csv(.gz)</code><ul>
+<li><code>YYYY/MM/DD/HH</code> is the 4 digit year, 2 digit month, 2 digit day, and 2 digit hour of the UTC time when this object was created</li>
+<li><code>{TABLE_NAME}</code> must be unique across all data sources within this lake and contain only alphanumeric characters and underscores, e.g. <code>[a-zA-Z0-9_]</code></li>
+<li>Per convention, <code>{TABLE_NAME}</code> should contain a unique prefix indicating the data source, e.g. <code>game_*</code></li>
+<li><code>{GUID}</code> is a Version 4 GUID</li>
+</ul>
+</li>
+</ol>
+
+<a href="#csv-format" id="csv-format" style="color: inherit; text-decoration: none;">
+  <h3>CSV Format</h3>
+</a>
+<p>CSV files uploaded to the data lake will adhere to the following specifications:</p>
+<ol>
+<li>Conform to <a href="https://tools.ietf.org/html/rfc4180">RFC 4180 - Common Format for Comma-Separated Values</a></li>
+<li>Contain only records for a single table</li>
+<li>Column headers must be declared in the first non-comment line</li>
+<li>Column headers must contain only alphanumeric characters (<code>[a-zA-Z0-9]</code>) and underscores (<code>_</code>)</li>
+<li>Column types should be declared as a comment in the first line, with the following specifications:<ul>
+<li>Aside from the comment character (<code>#</code>), the types row must contain a comma-separated list of text values indicating the column&#39;s data type</li>
+<li>Valid data types are as follows:
+ * <code>text</code>
+ * <code>timestamp(z)</code>
+ * <code>int</code></li>
+</ul>
+</li>
+</ol>
+
+<a href="#example-csv-data" id="example-csv-data" style="color: inherit; text-decoration: none;">
+  <h4>Example CSV Data</h4>
+</a>
+<pre><code><span class="hl-0">#</span><span class="hl-2">text</span><span class="hl-0">,</span><span class="hl-2">timestampz</span><span class="hl-0">,</span><span class="hl-2">int</span><br/><span class="hl-2">session_id</span><span class="hl-0">,</span><span class="hl-2">end_time</span><span class="hl-0">,</span><span class="hl-2">end_reason</span><br/><span class="hl-2">oiccvmz0cvuu</span><span class="hl-0">-2</span><span class="hl-2">my7wvf99enmi</span><span class="hl-0">,</span><span class="hl-10">2020</span><span class="hl-0">-</span><span class="hl-10">06</span><span class="hl-0">-08</span><span class="hl-11">T17</span><span class="hl-0">:</span><span class="hl-10">13</span><span class="hl-0">:49.062</span><span class="hl-7">Z</span><span class="hl-0">,</span><span class="hl-10">0</span><br/><span class="hl-0">2</span><span class="hl-2">slv18vtkjyl4</span><span class="hl-0">-28</span><span class="hl-2">nz20jhsdt3w</span><span class="hl-0">,</span><span class="hl-10">2020</span><span class="hl-0">-</span><span class="hl-10">06</span><span class="hl-0">-08</span><span class="hl-11">T17</span><span class="hl-0">:</span><span class="hl-10">13</span><span class="hl-0">:49.112</span><span class="hl-7">Z</span><span class="hl-0">,</span><span class="hl-10">2</span><br/><span class="hl-0">2</span><span class="hl-2">jk1eocbnkcys</span><span class="hl-0">-2</span><span class="hl-2">zffiy4q44z4o</span><span class="hl-0">,</span><span class="hl-10">2020</span><span class="hl-0">-</span><span class="hl-10">06</span><span class="hl-0">-08</span><span class="hl-11">T17</span><span class="hl-0">:</span><span class="hl-10">13</span><span class="hl-0">:49.523</span><span class="hl-7">Z</span><span class="hl-0">,</span><span class="hl-10">0</span>
+</code></pre>
+</div></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class="current"><a href="modules.html">Exports</a></li></ul></nav><nav class="tsd-navigation secondary menu-sticky"><ul><li class="tsd-kind-enum"><a href="enums/DataType.html" class="tsd-kind-icon">Data<wbr/>Type</a></li><li class="tsd-kind-enum"><a href="enums/FlushTrigger.html" class="tsd-kind-icon">Flush<wbr/>Trigger</a></li><li class="tsd-kind-class tsd-has-type-parameter"><a href="classes/Collector.html" class="tsd-kind-icon">Collector</a></li><li class="tsd-kind-class"><a href="classes/Store.html" class="tsd-kind-icon">Store</a></li><li class="tsd-kind-class"><a href="classes/StoreFS.html" class="tsd-kind-icon">StoreFS</a></li><li class="tsd-kind-class"><a href="classes/StoreS3.html" class="tsd-kind-icon">Store<wbr/>S3</a></li><li class="tsd-kind-interface tsd-has-type-parameter"><a href="interfaces/CollectorConfig.html" class="tsd-kind-icon">Collector<wbr/>Config</a></li><li class="tsd-kind-interface"><a href="interfaces/FlushInfo.html" class="tsd-kind-icon">Flush<wbr/>Info</a></li><li class="tsd-kind-type-alias"><a href="modules.html#CollectorSchema" class="tsd-kind-icon">Collector<wbr/>Schema</a></li><li class="tsd-kind-type-alias tsd-has-type-parameter"><a href="modules.html#TableColumnTypes" class="tsd-kind-icon">Table<wbr/>Column<wbr/>Types</a></li><li class="tsd-kind-type-alias"><a href="modules.html#TableRecord" class="tsd-kind-icon">Table<wbr/>Record</a></li></ul></nav></div></div></div><footer class="with-border-bottom"><div class="container"><h2>Legend</h2><div class="tsd-legend-group"><ul class="tsd-legend"><li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li><li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li><li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li><li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li></ul></div><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="container tsd-generator"><p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div><div class="overlay"></div><script src="assets/main.js"></script></body></html>
